@@ -10,27 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PING_H
-# define FT_PING_H
+# include "ft_ping.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <signal.h>
-# include <stdbool.h>
-# include <math.h>
-# include <sys/socket.h>
-# include <sys/types.h>
-# include <sys/time.h>
-# include <netdb.h>
-# include <netinet/in.h>
-# include <netinet/ip.h>
-# include <netinet/ip_icmp.h>
-# include <arpa/inet.h>
+int			main(int ac, char **av)
+{
+	if (ac < 2 || (av[1][0] == '-' && av[1][1] == 'h'))
+	{
+		printf("Usage: %s [-hv] destination\n", av[0]);
+		return (EXIT_FAILURE);
+	}
 
-#include "../libft/includes/libft.h"
-
-const char      *wrap_inet_ntop(int af, const void *src, char *dst, socklen_t size);
-
-#endif
+    return 1;
+}

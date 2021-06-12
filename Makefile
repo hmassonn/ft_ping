@@ -4,17 +4,17 @@ SHEL		=	/bin/bash
 CC			=	gcc
 CFLAGS		=	-g -Wall -Wextra -Werror
 
-LIBFT_DIR	=	../libft/
+LIBFT_DIR	=	./libft/
 SRCS_DIR	=	srcs/
 SRCS_LIST	=	ft_ping.c		\
-				main.c
+				wrapper.c
 
 SRCS		=	$(addprefix $(SRCS_DIR), $(SRCS_LIST))
 OBJS_DIR	=	objs/
 OBJS_LIST	=	$(patsubst %.c, %.o, $(SRCS_LIST))
 OBJS		=	$(addprefix $(OBJS_DIR), $(OBJS_LIST))
-HEADERS		=	-I../libft/includes -I./includes
-LIBS		=	../libft/libft.a
+HEADERS		=	-I./libft/includes -I./includes
+LIBS		=	./libft/libft.a
 
 .PHONY : all clean fclean norme re
 
@@ -36,11 +36,13 @@ norme :
 
 clean :
 	@rm -rf $(OBJS_DIR)
+	@make clean -C $(LIBFT_DIR)
 	@echo "\033[31mObjects files \033[1;31m$(OBJS_LIST)\033[1;0m\033[31m removed.\033[0m"
 
 fclean :
 	@rm -rf $(OBJS_DIR)
 	@rm -rf $(NAME)
+	@make fclean -C $(LIBFT_DIR)
 	@echo "\033[31mBin \033[1;31m$(NAME)\033[1;0m\033[31m removed.\033[0m"
 
 re : fclean all

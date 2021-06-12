@@ -16,23 +16,6 @@ CC = gcc
 
 INC = -I./includes
 
-STDIO_SRCS_NAME =   ft_printf.c					\
-					ft_initprintf.c				\
-					ft_convert_p.c				\
-					ft_printf_little_options.c	\
-					ft_printf_check_flags.c		\
-					ft_printf_push_flags.c		\
-					ft_printf_pull_str_flags.c	\
-					ft_printf_pull_char_flags.c	\
-					ft_printf_pull_wstr_flags.c	\
-					ft_convert_str.c			\
-					ft_convert_nbr.c			\
-					ft_convert_other.c			\
-					ft_convert_little.c			\
-					ft_convert_smaj.c			\
-
-STDIO_SRCS = $(addprefix stdio/, $(STDIO_SRCS_NAME))
-
 LIBC_SRCS_NAME = ft_memset.c		\
 				ft_bzero.c		\
 				ft_memcpy.c		\
@@ -64,8 +47,7 @@ LIBC_SRCS_NAME = ft_memset.c		\
 
 LIBC_SRCS = $(addprefix libc/, $(LIBC_SRCS_NAME))
 
-SRC =	$(STDIO_SRCS)	\
-		$(LIBC_SRCS)	\
+SRC =	$(LIBC_SRCS)	\
 	  ft_memalloc.c ft_memdel.c	ft_itoamax.c ft_puthexamaj.c ft_pow.c	\
 	  ft_strnew.c ft_strdel.c ft_strclr.c ft_striter.c ft_striteri.c	\
 	  ft_strmap.c ft_strmapi.c ft_strequ.c ft_strnequ.c ft_strsub.c		\

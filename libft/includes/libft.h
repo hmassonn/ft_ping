@@ -64,25 +64,10 @@ typedef struct	s_list
 	struct s_list	*next;
 }				t_list;
 
-int				convert_s(char *nb, va_list ap, t_flags	*flags);
-int				convert_smaj(char *nb, va_list ap, t_flags	*flags);
-int				convert_p(char *nb, va_list ap, t_flags *flags);
-int				convert_di(char *nb, va_list ap, t_flags	*flags);
-int				convert_dmaj(char *nb, va_list ap, t_flags *flags);
-int				convert_o(char *nb, va_list ap, t_flags *flags);
-int				convert_omaj(char *nb, va_list ap, t_flags *flags);
-int				convert_u(char *nb, va_list ap, t_flags *flags);
-int				convert_umaj(char *nb, va_list ap, t_flags *flags);
-int				convert_x(char *nb, va_list ap, t_flags *flags);
-int				convert_xmaj(char *nb, va_list ap, t_flags *flags);
-int				convert_c(char *nb, va_list ap, t_flags	*flags);
-int				convert_cmaj(char *nb, va_list ap, t_flags	*flags);
-int				convert_modulo(char *nb, va_list ap, t_flags *flags);
 t_flags			*check_minus(t_flags *flags, char format);
 t_flags			*check_plus(t_flags *flags, char format);
 t_flags			*check_point(t_flags *flags, char format);
 t_conv			*init_conv(t_conv *conv);
-int				smaj_end(size_t len, t_flags *flags, char *size);
 void			ft_putwchar(wchar_t c);
 void			ft_putwstr(wchar_t const *str);
 size_t			ft_wstrlen(wchar_t *str);
