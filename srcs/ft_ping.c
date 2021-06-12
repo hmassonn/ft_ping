@@ -12,43 +12,43 @@
 
 # include "ft_ping.h"
 
-void		run_socket(void)
+int		client(void)
 {
-  /* Socket et contexte d'adressage du serveur */
+	SOCKET sock;
     SOCKADDR_IN sin;
-    SOCKET sock;
-    socklen_t recsize = sizeof(sin);
-    
-    /* Socket et contexte d'adressage du client */
-    SOCKADDR_IN csin;
-    SOCKET csock;
-    socklen_t crecsize = sizeof(csin);
-	
-	/* Création d'une socket */
-	if ((sock = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET)
-		printf("error in socket");
-	printf("La socket %d est maintenant ouverte en mode TCP/IP\n", sock);
-	/* Configuration */
-	sin.sin_addr.s_addr = htonl(INADDR_ANY);  /* Adresse IP automatique */
-	sin.sin_family = AF_INET;                 /* Protocole familial (IP) */
-	sin.sin_port = htons(PORT);               /* Listage du port */
-	if (bind(sock, (SOCKADDR*)&sin, recsize) == SOCKET_ERROR)
-		printf("error in bind");
-	/* Démarrage du listage (mode server) */
-	if (listen(sock, 5) == SOCKET_ERROR)
-		printf("error in listen");
-	/* Attente pendant laquelle le client se connecte */
-	printf("Listage du port %d...\n", PORT);
-	printf("Patientez pendant que le client se connecte sur le port %d...\n", PORT);
-	if ((csock = accept(sock, (SOCKADDR*)&csin, &crecsize)) == INVALID_SOCKET)
-		printf("error in accept");
-	printf("Un client se connecte avec la socket %d de %s:%d\n", csock, inet_ntoa(csin.sin_addr), htons(csin.sin_port));
-	/* Fermeture de la socket client et de la socket serveur */
-	printf("Fermeture de la socket client\n");
-	closesocket(csock);
-	printf("Fermeture de la socket serveur\n");
-	closesocket(sock);
-	printf("Fermeture du serveur terminée\n");}
+    char buffer[500] = "";
+ 
+    /* Création de la socket */
+    sock = socket(AF_INET, SOCK_STREAM, 0);
+
+    /* Configuration de la connexion */
+    sin.sin_addr.s_addr = inet_addr("127.0.0.1");
+    sin.sin_family = AF_INET;
+    sin.sin_port = htons(PORT);
+
+    /* Si l'on a réussi à se connecter */
+    if(connect(sock, (SOCKADDR*)&sin, sizeof(sin)) != SOCKET_ERROR)
+    {
+        printf("Connection à %s sur le port %d\n", inet_ntoa(sin.sin_addr), htons(sin.sin_port));
+        
+        /* Si l'on reçoit des informations : on les affiche à l'écran */
+        if(recv(sock, buffer, 500, 0) != SOCKET_ERROR)
+            printf("Recu : %s\n", buffer);
+    }
+    /* sinon, on affiche "Impossible de se connecter" */
+    else
+    {
+        printf("Impossible de se connecter\n");
+    }
+
+    /* On ferme la socket */
+    closesocket(sock);
+ 
+    /* On attend que l'utilisateur tape sur une touche, puis on ferme */
+    getchar();
+ 
+    return EXIT_SUCCESS;
+}
 
 int			main(int ac, char **av)
 {
@@ -58,7 +58,7 @@ int			main(int ac, char **av)
 		return (EXIT_FAILURE);
 	}
 
-	run_socket();
+	client();
 
     return 1;
 }
