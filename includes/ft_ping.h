@@ -31,6 +31,15 @@
 
 #include "../libft/includes/libft.h"
 
+#define closesocket(param) close(param)
+#define INVALID_SOCKET -1
+#define SOCKET_ERROR -1
+#define PORT 23
+
+typedef int SOCKET;
+typedef struct sockaddr_in SOCKADDR_IN;
+typedef struct sockaddr SOCKADDR;
+
 const char      *wrap_inet_ntop(int af, const void *src, char *dst, socklen_t size);
 
 #endif
